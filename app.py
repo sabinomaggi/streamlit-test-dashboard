@@ -5,6 +5,13 @@ import altair as alt
 import os
 from datetime import datetime, date, time, timedelta
 
+# fix problem with requests library that isn't currently supported in Pyodide
+import urllib.parse
+import importlib
+import requests
+if importlib.util.find_spec("pyodide") is not None:
+    from pyodide.http import open_url
+
 
 # DATASET = "file://" + os.getcwd() + "/air_quality.csv"
 DATASET = "https://raw.githubusercontent.com/sabinomaggi/streamlit-test-dashboard/main/air_quality.csv"
@@ -16,7 +23,17 @@ ELEMENTS = 5000
 
 
 @st.cache(show_spinner = False)
-def load_data(filename = DATASET, nrows = None):
+def load_data(url = DATASET, nrows = None):
+    # fix problem with requests library that isn't currently supported in Pyodide:
+    # if Pyodide is available (i.e., we are running the app in a browser)
+    if importlib.util.find_spec("pyodide") is not None:
+        filename = open_url(url)
+        top_container.info(filename)
+    # otherwise run locally with `streamlit run app.py`
+    else:
+        filename = url
+        top_container.info(filename)
+
     # read csv file and fix names of dataframe columns
     data = pd.read_csv(filename, nrows = nrows)
     uppercase = lambda x: str(x).upper()
