@@ -6,7 +6,9 @@ import os
 from datetime import datetime, date, time, timedelta
 
 
-DATASET = "file://" + os.getcwd() + "/air_quality.csv"
+# DATASET = "file://" + os.getcwd() + "/air_quality.csv"
+DATASET = "https://raw.githubusercontent.com/sabinomaggi/streamlit-test-dashboard/main/air_quality.csv"
+
 DATE_COLUMN = "TIME"
 VALUES = ["PM25", "PM10", "AQI25", "AQI10"]
 COLORS = ["red", "purple", "blue", "navyblue"]
