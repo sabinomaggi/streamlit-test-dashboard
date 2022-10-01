@@ -1,0 +1,21 @@
+#---------------------------------------------------------#
+# .gitignore file for the streamlit dashboard project     #
+#                                                         #
+# Author: Sabino Maggi, CNR-IIA                           #
+# Last revision: Sep 2022                                 #
+#---------------------------------------------------------#
+
+#--- ignore Mac OS X junk
+.DS_Store
+.*DS_Store
+
+#--- ignore data files
+# *.csv
+
+#--- ignore directory with test stuff
+IGNOREME
+
+#--- ignore everything inside the directories below
+# src/test/
+# data/
+# runs/
